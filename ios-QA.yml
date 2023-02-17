@@ -9,7 +9,7 @@ steps:
 
   - task: InstallAppleProvisioningProfile@1
     inputs:
-      provProfileSecureFile: 'democicd.mobileprovision'
+      provProfileSecureFile: 'cdcdepayco.mobileprovision'
       removeProfile: true
     
   - task: Xcode@5
