@@ -33,7 +33,7 @@ stages:
         - task: InstallAppleCertificate@2
           inputs:
             certSecureFile: 'Rename.12'
-            certPwd: '$(p12password)'
+            certPwd: 'SuperC4reCulo1.'
             keychain: 'temp'
             deleteCert: true  
 
