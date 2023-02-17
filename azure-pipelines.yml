@@ -9,12 +9,27 @@ trigger:
 pool:
   vmImage: 'macos-latest'
 
-steps:
-- task: Xcode@5
-  inputs:
-    actions: 'build'
-    scheme: ''
-    sdk: 'iphoneos'
-    configuration: 'Release'
-    xcWorkspacePath: '**/*.xcodeproj/project.xcworkspace'
-    xcodeVersion: 'default' # Options: 8, 9, 10, 11, 12, default, specifyPath
+variables:
+   - group: epaycoDev
+
+stages:
+  - stage: Build
+    displayName: Build iOS QA
+    jobs:
+      # Debug buildg
+      - job: Build_Ios_QA
+        variables:
+          - name: SDK
+            value: iphoneos
+          - name: Configuration
+            value: Release
+        displayName: Build QA
+        steps:
+        - task: Xcode@5
+          inputs:
+            actions: 'build'
+            scheme: ''
+            sdk: $(SDK)
+            configuration: $(Configuration)
+            xcWorkspacePath: '**/*.xcodeproj/project.xcworkspace'
+            xcodeVersion: 'default' # Options: 8, 9, 10, 11, 12, default, specifyPath
