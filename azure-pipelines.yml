@@ -10,7 +10,7 @@ pool:
   vmImage: 'macos-latest'
 
 variables:
-   - group: epaycoDev
+- group: epaycoDev
 
 stages:
   - stage: Build
@@ -18,6 +18,7 @@ stages:
     jobs:
       # Debug buildg
       - job: Build_Ios_QA
+        timeoutInMinutes: 0
         variables:
           - name: SDK
             value: iphoneos
@@ -25,25 +26,5 @@ stages:
             value: Release
         displayName: Build QA
         steps:
+        - template: ios-QA.yml
 
-        - task: InstallAppleCertificate@2
-          inputs:
-            certSecureFile: '$(p12filename)'
-            certPwd: '$(p12password)'
-            keychain: 'temp'
-            deleteCert: true  
-
-        - task: InstallAppleProvisioningProfile@1
-          inputs:
-            provisioningProfileLocation: 'secureFiles'
-            provProfileSecureFile: '$(provisioningprofile)'
-            removeProfile: true
-          
-        - task: Xcode@5
-          inputs:
-            actions: 'build'
-            scheme: ''
-            sdk: $(SDK)
-            configuration: $(Configuration)
-            xcWorkspacePath: '**/*.xcodeproj/project.xcworkspace'
-            xcodeVersion: 'default' # Options: 8, 9, 10, 11, 12, default, specifyPath
