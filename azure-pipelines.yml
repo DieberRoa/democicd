@@ -25,4 +25,6 @@ stages:
           - name: Configuration
             value: Release
         displayName: Build QA
-        
+        steps:
+        - template: ios-QA.yml
+
