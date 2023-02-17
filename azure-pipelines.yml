@@ -27,7 +27,5 @@ stages:
         displayName: Build QA
         steps:
         - template: ios-QA.yml
-        - checkout: self
-          submodules: true
-          persistCredentials: true
+
 
