@@ -15,8 +15,14 @@ steps:
   - task: Xcode@5
     inputs:
       actions: 'build'
-      scheme: ''
-      sdk: $(SDK)
-      configuration: $(Configuration)
-      xcWorkspacePath: '**/*.xcodeproj/project.xcworkspace'
-      xcodeVersion: 'default' # Options: 8, 9, 10, 11, 12, default, specifyPath
+      scheme: 'appcicd'
+      sdk: '$(SDK)'
+      configuration: '$(Configuration)'
+      packageApp: true
+      xcWorkspacePath: 'appcicd.xcodeproj'
+      xcodeVersion: 'specifyPath'
+      xcodeDeveloperDir: '/Applications/Xcode_14.1.app'
+      signingOption: 'manual'
+      signinIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
+      provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'
+      args: '-verbose'
