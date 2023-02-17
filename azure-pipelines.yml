@@ -18,6 +18,7 @@ stages:
     jobs:
       # Debug buildg
       - job: Build_Ios_QA
+        timeoutInMinutes: 0
         variables:
           - name: SDK
             value: iphoneos
@@ -25,6 +26,9 @@ stages:
             value: Release
         displayName: Build QA
         steps:
+        - checkout: self
+          submodules: true
+          persistCredentials: true
 
         - task: InstallAppleCertificate@2
           inputs:
