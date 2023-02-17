@@ -1,8 +1,4 @@
 steps:
-- template: ios-QA.yml
-- checkout: self
-  submodules: true
-  persistCredentials: true
 
   - task: InstallAppleCertificate@2
     inputs:
