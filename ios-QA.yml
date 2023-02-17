@@ -26,3 +26,14 @@ steps:
       signinIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
       provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'
       args: '-verbose'
+
+  - task: CopyFiles@2
+    inputs:
+      contents: '**/*.ipa'
+      targetFolder: '$(build.artifactStagingDirectory)'
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
