@@ -25,6 +25,20 @@ stages:
             value: Release
         displayName: Build QA
         steps:
+
+        - task: InstallAppleCertificate@2
+          inputs:
+            certSecureFile: '$(p12filename)'
+            certPwd: '$(p12password)'
+            keychain: 'temp'
+            deleteCert: true  
+
+        - task: InstallAppleProvisioningProfile@1
+          inputs:
+            provisioningProfileLocation: 'secureFiles'
+            provProfileSecureFile: '$(provisioningprofile)'
+            removeProfile: true
+          
         - task: Xcode@5
           inputs:
             actions: 'build'
