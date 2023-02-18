@@ -15,10 +15,10 @@ variables:
 
 stages:
   - stage: Build
-    displayName: Build iOS $(Build.SourceBranch)
+    displayName: Build iOS
     jobs:
       # Debug buildg
-      - job: Build_Ios_$(Build.SourceBranch)
+      - job: Build_Ios
         timeoutInMinutes: 0
         variables:
           - name: SDK
@@ -27,7 +27,11 @@ stages:
             value: Release
         displayName: Build $(Build.SourceBranch)
         steps:
-        - template: ios-$(Build.SourceBranch).yml
+          - ${{ if ne($(Build.SourceBranch), 'develop') }} 
+          - template: ios-develop.yml
+          - ${{ if ne($(Build.SourceBranch), 'main') }} 
+          - template: ios-main.yml
+
 
 
 
