@@ -25,11 +25,13 @@ stages:
             value: iphoneos
           - name: Configuration
             value: Release
+          - name: branch
+            value: $(Build.SourceBranch)
         displayName: Build $(Build.SourceBranch)
         steps:
-          - ${{ if ne($(Build.SourceBranch), 'develop') }} 
+          - ${{ if ne($(branch), 'develop') }} 
           - template: ios-develop.yml
-          - ${{ if ne($(Build.SourceBranch), 'main') }} 
+          - ${{ if ne($(branch), 'main') }} 
           - template: ios-main.yml
 
 
